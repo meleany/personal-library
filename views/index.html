@@ -1,0 +1,133 @@
+<html>
+  <head>
+    <title>Personal Library</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet. -->
+    <link rel="stylesheet" href="/public/style.css">
+    
+    <!-- import Google fonts and awesome icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Julius Sans One" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Electrolize" rel="stylesheet" type="text/css">        
+    <link href="https://fonts.googleapis.com/css?family=Rajdhani:400,700" rel="stylesheet" type="text/css">               
+  </head>
+  
+  <body>
+    <header>
+      <h1>Personal Library</h1>
+      <h4>FreeCodeCamp Information Security & Quality Assurance Project 03</h4>
+    </header>
+    
+    <div id="userstories">
+      <h3>User stories</h3>
+      <ol>
+        <li>Nothing from my website will be cached in my client as a security measure.</li>
+        <li>I will see that the site is powered by 'PHP 4.2.0', even though it isn't, as a security measure.</li>
+        <li>I can <code>POST /api/books</code> a <code>title</code> to add a book and returned will be the object with the <code>title</code> and 
+          an unique <code>_id</code>.
+        </li>
+        <li>I can <code>GET /api/books</code> to retrieve an array of all books containing <code>title</code>, <code>_id</code> & 
+          <code>commentcount</code>.
+        </li>
+        <li>I can <code>GET /api/books/{_id}</code> to retrieve a single object of a book containing <code>title</code>, <code>_id</code>, & an 
+          array of <code>comments</code> (empty array if no comments present).
+        </li>
+        <li>I can <code>POST</code> a <code>comment</code> to <code>/api/books/{_id}</code> to add a comment to a book and returned will be the 
+          books object similar to <code>GET /api/books/{_id}</code>.
+        </li>
+        <li>I can <code>DELETE /api/books/{_id}</code> to delete a book from the collection. Successfully deleted object returns the message 
+          'Delete successful'.
+        </li>
+        <li>If I try to request a book that doesn't exist I will get a 'No book exists' message.</li>
+        <li>I can send a <code>DELETE</code> request to <code>/api/books</code> to delete all books in the database. If successful the returned 
+          response will be 'Complete delete successful'.
+        </li>
+        <li>All 6 functional tests required are complete and passing.</li>
+      </ol>
+      
+      <h3>Example:</h3>
+      <img src="https://cdn.gomix.com/d7932c52-287f-4dae-b175-631fef453000%2FScreen%20Shot%202016-12-16%20at%201.35.56%20AM.png" />
+    </div>
+    
+    <div id ="sampleposting">
+      <h2>API Tests</h2>
+      
+      <form action="/api/books" method="post" class="border">
+        <fieldset>
+          <legend>Test POST to /api/books</legend>
+          Book Title:<br>
+          <input type="text" name="title" value="" required><br>
+          <input type="submit" value="Submit">
+        </fieldset>
+      </form>
+      
+      <form action="" method="post" id="commentTest" class="border">
+        <fieldset>
+          <legend>Test POST to /api/books/{bookid}</legend>
+          BookId to comment on:<br>
+          <input type="text" name="id" value="" id="idinputtest" required><br>
+          Comment:<br>  
+          <input type="text" name="comment" value="" required><br>
+          <input type="submit" value="Submit">
+        </fieldset>
+      </form>
+            
+    </div>
+
+    <div id="sampleui">
+      <h2>Front-End Sample</h2>
+      
+      <form id="newBookForm">
+        <fieldset>
+          <legend>New Book</legend>
+          <input type="text" id="bookTitleToAdd" name="title" placeholder="Book Title" required>
+          <button type="submit" value="Submit" id="newBook">Submit New Book!</button>
+        </fieldset>
+      </form>
+      
+      <div id="display">
+        <h3>Available books</h3>
+      </div>          
+      <div id="bookDetail">
+        <p id="detailTitle">Select a book from the list above (click on it) to see and/or modify it's details</p>
+        <ol id="detailComments"></ol>
+      </div>
+      <div id="deleteDiv">
+        <button id="deleteAllBooks">Delete all books ...</button>
+      </div>
+    </div>
+    
+    <footer>
+      <div id="footer-row1">
+        <a class="button" href="https://www.freecodecamp.com/meleany" target="_blank"> <i class="fa fa-free-code-camp fa-2x fa-fw"></i> </a> 
+        <a class="button" href="https://github.com/meleany" target="_blank"> <i class="fa fa-github-alt fa-2x fa-fw"></i> </a>
+        <a class="button" href="https://codepen.io/meleany" target="_blank"> <i class="fa fa-codepen fa-2x fa-fw"></i> </a>
+        <a class="button" href="https://ymelbart.wordpress.com/" target="_blank"> <i class="fa fa-wordpress fa-2x fa-fw"></i> </a>
+      </div>
+      <div id="footer-row2">
+        Designed by Yasmin Melean 2019.
+      </div>
+    </footer> 
+    
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/public/client.js"></script>           
+    <script>
+      /*
+      *  For #sampleposting to update form action url to test inputs book id
+      */
+      $(function() {
+       $('#commentTest').submit(function(){
+         var id = $('#idinputtest').val();
+         $(this).attr('action', "/api/books/" + id);
+       });
+                
+      });      
+   </script>
+  </body>
+</html>
